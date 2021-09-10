@@ -27,7 +27,7 @@ class StoryMenuState extends MusicBeatState
 	public static function weekData():Array<Dynamic>
 	{
 		return [
-			['Bopeebo', 'Fresh', 'Dad Battle'],
+			['vsbf']
 		];
 	}
 	var curDifficulty:Int = 1;
@@ -35,7 +35,7 @@ class StoryMenuState extends MusicBeatState
 	public static var weekUnlocked:Array<Bool> = [];
 
 	var weekCharacters:Array<Dynamic> = [
-		['dad', 'bf', 'gf'],
+		['bf', 'ph', 'gf']
 	];
 
 	var weekNames:Array<String> = CoolUtil.coolTextFile(Paths.txt('data/weekNames'));
@@ -344,7 +344,7 @@ class StoryMenuState extends MusicBeatState
 				FlxG.sound.play(Paths.sound('confirmMenu'));
 
 				grpWeekText.members[curWeek].startFlashing();
-				grpWeekCharacters.members[1].animation.play('bfConfirm');
+				grpWeekCharacters.members[1].animation.play('phConfirm');
 				stopspamming = true;
 			}
 
@@ -357,10 +357,6 @@ class StoryMenuState extends MusicBeatState
 
 			// adjusting the song name to be compatible
 			var songFormat = StringTools.replace(PlayState.storyPlaylist[0], " ", "-");
-			switch (songFormat) {
-				case 'Dad-Battle': songFormat = 'Dadbattle';
-				case 'Philly-Nice': songFormat = 'Philly';
-			}
 
 			var poop:String = Highscore.formatSong(songFormat, curDifficulty);
 			PlayState.sicks = 0;

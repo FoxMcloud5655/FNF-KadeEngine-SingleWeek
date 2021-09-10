@@ -112,8 +112,8 @@ class ChartingState extends MusicBeatState
 	var gridBlackLine:FlxSprite;
 	var vocals:FlxSound;
 
-	var player2:Character = new Character(0,0, "dad");
-	var player1:Boyfriend = new Boyfriend(0,0, "bf");
+	var player2:Boyfriend = new Boyfriend(0,0, "bf");
+	var player1:PlaceHolder = new PlaceHolder(0,0, "ph");
 
 	public static var leftIcon:HealthIcon;
 
@@ -166,8 +166,8 @@ class ChartingState extends MusicBeatState
 				eventObjects: [],
 				bpm: 150,
 				needsVoices: true,
-				player1: 'bf',
-				player2: 'dad',
+				player1: 'ph',
+				player2: 'bf',
 				gfVersion: 'gf',
 				noteStyle: 'normal',
 				stage: 'stage',
@@ -1273,18 +1273,6 @@ class ChartingState extends MusicBeatState
 		tab_group_note.add(applyLength);
 
 		UI_box.addGroup(tab_group_note);
-
-		/*player2 = new Character(0,0, _song.player2);
-		player1 = new Boyfriend(player2.width * 0.2,0 + player2.height, _song.player1);
-
-		player1.y = player1.y - player1.height;
-
-		player2.setGraphicSize(Std.int(player2.width * 0.2));
-		player1.setGraphicSize(Std.int(player1.width * 0.2));
-
-		UI_box.add(player1);
-		UI_box.add(player2);*/
-
 	}
 	
 

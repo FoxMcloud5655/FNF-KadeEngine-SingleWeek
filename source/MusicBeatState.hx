@@ -48,6 +48,29 @@ class MusicBeatState extends FlxUIState
 
 	override function update(elapsed:Float)
 	{
+		//everyStep();
+		/*var nextStep:Int = updateCurStep();
+
+		if (nextStep >= 0)
+		{
+			if (nextStep > curStep)
+			{
+				for (i in curStep...nextStep)
+				{
+					curStep++;
+					updateBeat();
+					stepHit();
+				}
+			}
+			else if (nextStep < curStep)
+			{
+				//Song reset?
+				curStep = nextStep;
+				updateBeat();
+				stepHit();
+			}
+		}*/
+
 		if (Conductor.songPosition < 0)
 			curDecimalBeat = 0;
 		else

@@ -210,13 +210,13 @@ class ModchartState
 		{
 			case 'boyfriend':
                 @:privateAccess
-				return PlayState.boyfriend;
+				return PlayState.placeholder;
 			case 'girlfriend':
                 @:privateAccess
 				return PlayState.gf;
 			case 'dad':
                 @:privateAccess
-				return PlayState.dad;
+				return PlayState.bf;
 		}
 		// lua objects or what ever
 		if (luaSprites.get(id) == null)
@@ -236,20 +236,20 @@ class ModchartState
 	public static var luaSprites:Map<String,FlxSprite> = [];
 
 	function changeDadCharacter(id:String)
-	{				var olddadx = PlayState.dad.x;
-					var olddady = PlayState.dad.y;
-					PlayState.instance.removeObject(PlayState.dad);
-					PlayState.dad = new Character(olddadx, olddady, id);
-					PlayState.instance.addObject(PlayState.dad);
+	{				var oldbfx = PlayState.bf.x;
+					var oldbfy = PlayState.bf.y;
+					PlayState.instance.removeObject(PlayState.bf);
+					PlayState.bf = new Character(oldbfx, oldbfy, id);
+					PlayState.instance.addObject(PlayState.bf);
 					PlayState.instance.iconP2.changeIcon(id);
 	}
 
-	function changeBoyfriendCharacter(id:String)
-	{				var oldboyfriendx = PlayState.boyfriend.x;
-					var oldboyfriendy = PlayState.boyfriend.y;
-					PlayState.instance.removeObject(PlayState.boyfriend);
-					PlayState.boyfriend = new Boyfriend(oldboyfriendx, oldboyfriendy, id);
-					PlayState.instance.addObject(PlayState.boyfriend);
+	function changeboyfriendCharacter(id:String)
+	{				var oldplaceholderx = PlayState.placeholder.x;
+					var oldplaceholdery = PlayState.placeholder.y;
+					PlayState.instance.removeObject(PlayState.placeholder);
+					PlayState.placeholder = new PlaceHolder(oldplaceholderx, oldplaceholdery, id);
+					PlayState.instance.addObject(PlayState.placeholder);
 					PlayState.instance.iconP1.changeIcon(id);
 	}
 
@@ -331,15 +331,15 @@ class ModchartState
             if (drawBehind)
             {
                 PlayState.instance.removeObject(PlayState.gf);
-                PlayState.instance.removeObject(PlayState.boyfriend);
-                PlayState.instance.removeObject(PlayState.dad);
+                PlayState.instance.removeObject(PlayState.placeholder);
+                PlayState.instance.removeObject(PlayState.bf);
             }
             PlayState.instance.addObject(sprite);
             if (drawBehind)
             {
                 PlayState.instance.addObject(PlayState.gf);
-                PlayState.instance.addObject(PlayState.boyfriend);
-                PlayState.instance.addObject(PlayState.dad);
+                PlayState.instance.addObject(PlayState.placeholder);
+                PlayState.instance.addObject(PlayState.bf);
             }
         }
 		#end
@@ -434,7 +434,7 @@ class ModchartState
 				
 				Lua_helper.add_callback(lua,"changeDadCharacter", changeDadCharacter);
 
-				Lua_helper.add_callback(lua,"changeBoyfriendCharacter", changeBoyfriendCharacter);
+				Lua_helper.add_callback(lua,"changeboyfriendCharacter", changeboyfriendCharacter);
 	
 				Lua_helper.add_callback(lua,"getProperty", getPropertyByName);
 				

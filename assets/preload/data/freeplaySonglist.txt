@@ -1,3 +1,1 @@
-Bopeebo:dad:1
-Fresh:dad:1
-Dad Battle:dad:1
+vsbf:bf:0

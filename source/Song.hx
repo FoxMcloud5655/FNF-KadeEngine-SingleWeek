@@ -51,8 +51,8 @@ class Song
 	public var eventObjects:Array<Event>;
 	public var speed:Float = 1;
 
-	public var player1:String = 'bf';
-	public var player2:String = 'dad';
+	public var player1:String = 'ph';
+	public var player2:String = 'bf';
 	public var gfVersion:String = '';
 	public var noteStyle:String = '';
 	public var stage:String = '';

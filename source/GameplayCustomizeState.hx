@@ -31,8 +31,8 @@ class GameplayCustomizeState extends MusicBeatState
     var text:FlxText;
     var blackBorder:FlxSprite;
 
+    var ph:PlaceHolder;
     var bf:Boyfriend;
-    var dad:Character;
     var gf:Character;
 
     var strumLine:FlxSprite;
@@ -71,20 +71,20 @@ class GameplayCustomizeState extends MusicBeatState
 
 		var camFollow = new FlxObject(0, 0, 1, 1);
 
-		dad = new Character(100, 100, 'dad');
+		bf = new Boyfriend(100, 100, 'bf');
 
-        bf = new Boyfriend(770, 450, 'bf');
+        ph = new PlaceHolder(770, 450, 'ph');
 
         gf = new Character(400, 130, 'gf');
 		gf.scrollFactor.set(0.95, 0.95);
 
-		var camPos:FlxPoint = new FlxPoint(dad.getGraphicMidpoint().x + 400, dad.getGraphicMidpoint().y);
+		var camPos:FlxPoint = new FlxPoint(bf.getGraphicMidpoint().x + 400, bf.getGraphicMidpoint().y);
 
 		camFollow.setPosition(camPos.x, camPos.y);
 
         add(gf);
         add(bf);
-        add(dad);
+        add(ph);
 
         add(sick);
 
@@ -193,8 +193,8 @@ class GameplayCustomizeState extends MusicBeatState
     {
         super.beatHit();
 
-        bf.playAnim('idle', true);
-        dad.dance(true);
+        ph.playAnim('idle', true);
+        bf.dance(true);
         gf.dance();
 
         FlxG.camera.zoom += 0.015;

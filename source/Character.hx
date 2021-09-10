@@ -13,11 +13,11 @@ class Character extends FlxSprite
 	public var debugMode:Bool = false;
 
 	public var isPlayer:Bool = false;
-	public var curCharacter:String = 'bf';
+	public var curCharacter:String = 'ph';
 
 	public var holdTimer:Float = 0;
 
-	public function new(x:Float, y:Float, ?character:String = "bf", ?isPlayer:Bool = false)
+	public function new(x:Float, y:Float, ?character:String = "ph", ?isPlayer:Bool = false)
 	{
 		super(x, y);
 
@@ -53,19 +53,30 @@ class Character extends FlxSprite
 
 				playAnim('danceRight');
 
-			case 'dad':
-				// DAD ANIMATION LOADING CODE
-				tex = Paths.getSparrowAtlas('DADDY_DEAREST','shared',true);
+			case 'ph':
+				tex = Paths.getSparrowAtlas('PLACEHOLDER','shared',true);
 				frames = tex;
-				animation.addByPrefix('idle', 'Dad idle dance', 24);
-				animation.addByPrefix('singUP', 'Dad Sing Note UP', 24);
-				animation.addByPrefix('singRIGHT', 'Dad Sing Note RIGHT', 24);
-				animation.addByPrefix('singDOWN', 'Dad Sing Note DOWN', 24);
-				animation.addByPrefix('singLEFT', 'Dad Sing Note LEFT', 24);
+				animation.addByPrefix('idle', 'PH idle dance', 24, false);
+				animation.addByPrefix('singUP', 'PH NOTE UP0', 24, false);
+				animation.addByPrefix('singRIGHT', 'PH NOTE LEFT0', 24, false);
+				animation.addByPrefix('singLEFT', 'PH NOTE RIGHT0', 24, false);
+				animation.addByPrefix('singDOWN', 'PH NOTE DOWN0', 24, false);
+				animation.addByPrefix('singUPmiss', 'PH NOTE UP MISS', 24, false);
+				animation.addByPrefix('singRIGHTmiss', 'PH NOTE LEFT MISS', 24, false);
+				animation.addByPrefix('singLEFTmiss', 'PH NOTE RIGHT MISS', 24, false);
+				animation.addByPrefix('singDOWNmiss', 'PH NOTE DOWN MISS', 24, false);
+				animation.addByPrefix('hey', 'PH HEY!!', 24, false);
+				animation.addByPrefix('scared', 'PH idle shaking', 24, false);
+
+				animation.addByPrefix('firstDeath', "PH dies", 24, false);
+				animation.addByPrefix('deathLoop', "PH Dead Loop", 24, false);
+				animation.addByPrefix('deathConfirm', "PH Dead confirm", 24, false);
 
 				loadOffsetFile(curCharacter);
 
 				playAnim('idle');
+
+				flipX = true;
 
 			case 'bf':
 				var tex = Paths.getSparrowAtlas('BOYFRIEND','shared',true);
@@ -99,22 +110,20 @@ class Character extends FlxSprite
 		if (isPlayer)
 		{
 			flipX = !flipX;
+		}
+		if (curCharacter == 'bf' || curCharacter == 'ph')
+		{
+			// var animArray
+			var oldRight = animation.getByName('singRIGHT').frames;
+			animation.getByName('singRIGHT').frames = animation.getByName('singLEFT').frames;
+			animation.getByName('singLEFT').frames = oldRight;
 
-			// Doesn't flip for BF, since his are already in the right place???
-			if (!curCharacter.startsWith('bf'))
+			// IF THEY HAVE MISS ANIMATIONS??
+			if (animation.getByName('singRIGHTmiss') != null)
 			{
-				// var animArray
-				var oldRight = animation.getByName('singRIGHT').frames;
-				animation.getByName('singRIGHT').frames = animation.getByName('singLEFT').frames;
-				animation.getByName('singLEFT').frames = oldRight;
-
-				// IF THEY HAVE MISS ANIMATIONS??
-				if (animation.getByName('singRIGHTmiss') != null)
-				{
-					var oldMiss = animation.getByName('singRIGHTmiss').frames;
-					animation.getByName('singRIGHTmiss').frames = animation.getByName('singLEFTmiss').frames;
-					animation.getByName('singLEFTmiss').frames = oldMiss;
-				}
+				var oldMiss = animation.getByName('singRIGHTmiss').frames;
+				animation.getByName('singRIGHTmiss').frames = animation.getByName('singLEFTmiss').frames;
+				animation.getByName('singLEFTmiss').frames = oldMiss;
 			}
 		}
 	}
@@ -134,7 +143,7 @@ class Character extends FlxSprite
 
 	override function update(elapsed:Float)
 	{
-		if (!curCharacter.startsWith('bf'))
+		if (!curCharacter.startsWith('bf') && !curCharacter.startsWith('ph'))
 		{
 			if (animation.curAnim.name.startsWith('sing'))
 			{

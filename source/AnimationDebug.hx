@@ -14,15 +14,15 @@ import flixel.util.FlxColor;
  */
 class AnimationDebug extends FlxState
 {
+	var ph:PlaceHolder;
 	var bf:Boyfriend;
-	var dad:Character;
 	var char:Character;
 	var textAnim:FlxText;
 	var dumbTexts:FlxTypedGroup<FlxText>;
 	var animList:Array<String> = [];
 	var curAnim:Int = 0;
-	var isDad:Bool = true;
-	var daAnim:String = 'spooky';
+	var isBF:Bool = true;
+	var daAnim:String = 'bf';
 	var camFollow:FlxObject;
 
 	public function new(daAnim:String = 'bf')
@@ -39,20 +39,10 @@ class AnimationDebug extends FlxState
 		gridBG.scrollFactor.set(0.5, 0.5);
 		add(gridBG);
 
-		if (daAnim == 'bf')
-			isDad = false;
+		if (daAnim == 'ph')
+			isBF = false;
 
-		if (isDad)
-		{
-			dad = new Character(0, 0, daAnim);
-			dad.screenCenter();
-			dad.debugMode = true;
-			add(dad);
-
-			char = dad;
-			dad.flipX = false;
-		}
-		else
+		if (isBF)
 		{
 			bf = new Boyfriend(0, 0);
 			bf.screenCenter();
@@ -60,7 +50,17 @@ class AnimationDebug extends FlxState
 			add(bf);
 
 			char = bf;
-			bf.flipX = false;
+			bf.flipX = true;
+		}
+		else
+		{
+			ph = new PlaceHolder(0, 0);
+			ph.screenCenter();
+			ph.debugMode = true;
+			add(ph);
+
+			char = ph;
+			ph.flipX = false;
 		}
 
 		dumbTexts = new FlxTypedGroup<FlxText>();

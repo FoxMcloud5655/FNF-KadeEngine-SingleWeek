@@ -126,14 +126,9 @@ class TitleState extends MusicBeatState
 		// bg.setGraphicSize(Std.int(bg.width * 0.6));
 		// bg.updateHitbox();
 		add(bg);
-
-		if (Main.watermarks) {
-			logoBl = new FlxSprite(-150, 1500);
-			logoBl.frames = Paths.getSparrowAtlas('KadeEngineLogoBumpin');
-		} else {
-			logoBl = new FlxSprite(-150, -100);
-			logoBl.frames = Paths.getSparrowAtlas('logoBumpin');
-		}
+		logoBl = new FlxSprite(-10, 10);
+		logoBl.scale.set(0.75, 0.75);
+		logoBl.frames = Paths.getSparrowAtlas('logoBumpin');
 		if(FlxG.save.data.antialiasing)
 		{
 			logoBl.antialiasing = true;
@@ -428,7 +423,7 @@ class TitleState extends MusicBeatState
 			FlxG.camera.flash(FlxColor.WHITE, 4);
 			remove(credGroup);
 
-			FlxTween.tween(logoBl,{y: -100}, 1.4, {ease: FlxEase.expoInOut});
+			FlxTween.tween(logoBl,{y: -10}, 1.4, {ease: FlxEase.expoInOut});
 
 			logoBl.angle = -4;
 

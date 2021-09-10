@@ -30,12 +30,12 @@ class GameOverState extends FlxTransitionableState
 			loser.animation.play('lose');
 			add(loser);
 
-		var bf:Boyfriend = new Boyfriend(bfX, bfY);
+		var ph:PlaceHolder = new PlaceHolder(bfX, bfY);
 		// bf.scrollFactor.set();
-		add(bf);
-		bf.playAnim('firstDeath');
+		add(ph);
+		ph.playAnim('firstDeath');
 
-		FlxG.camera.follow(bf, LOCKON, 0.001);
+		FlxG.camera.follow(ph, LOCKON, 0.001);
 		
 			var restart:FlxSprite = new FlxSprite(500, 50).loadGraphic(Paths.image('restart'));
 			restart.setGraphicSize(Std.int(restart.width * 0.6));
