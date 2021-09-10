@@ -135,9 +135,9 @@ class TitleState extends MusicBeatState
 			logoBl.frames = Paths.getSparrowAtlas('logoBumpin');
 		}
 		if(FlxG.save.data.antialiasing)
-			{
-				logoBl.antialiasing = true;
-			}
+		{
+			logoBl.antialiasing = true;
+		}
 		logoBl.animation.addByPrefix('bump', 'logo bumpin', 24, false);
 		logoBl.updateHitbox();
 		// logoBl.screenCenter();
@@ -199,9 +199,9 @@ class TitleState extends MusicBeatState
 		ngSpr.updateHitbox();
 		ngSpr.screenCenter(X);
 		if(FlxG.save.data.antialiasing)
-			{
-				ngSpr.antialiasing = true;
-			}
+		{
+			ngSpr.antialiasing = true;
+		}
 
 		FlxTween.tween(credTextShit, {y: credTextShit.y + 20}, 2.9, {ease: FlxEase.quadInOut, type: PINGPONG});
 
@@ -230,9 +230,7 @@ class TitleState extends MusicBeatState
 			// music.loadStream(Paths.music('freakyMenu'));
 			// FlxG.sound.list.add(music);
 			// music.play();
-			FlxG.sound.playMusic(Paths.music('freakyMenu'), 0);
-
-			FlxG.sound.music.fadeIn(4, 0, 0.7);
+			FlxG.sound.playMusic(Paths.music('freakyMenu'), 1);
 			Conductor.changeBPM(102);
 			initialized = true;
 		}
@@ -299,41 +297,10 @@ class TitleState extends MusicBeatState
 			transitioning = true;
 			// FlxG.sound.music.stop();
 
+			FlxG.switchState(new MainMenuState());
+
 			MainMenuState.firstStart = true;
 			MainMenuState.finishedFunnyMove = false;
-
-			new FlxTimer().start(2, function(tmr:FlxTimer)
-			{
-				// Get current version of Kade Engine
-				
-				var http = new haxe.Http("https://raw.githubusercontent.com/KadeDev/Kade-Engine/master/version.downloadMe");
-				var returnedData:Array<String> = [];
-				
-				http.onData = function (data:String)
-				{
-					returnedData[0] = data.substring(0, data.indexOf(';'));
-					returnedData[1] = data.substring(data.indexOf('-'), data.length);
-				  	if (!MainMenuState.kadeEngineVer.contains(returnedData[0].trim()) && !OutdatedSubState.leftState)
-					{
-						trace('outdated lmao! ' + returnedData[0] + ' != ' + MainMenuState.kadeEngineVer);
-						OutdatedSubState.needVer = returnedData[0];
-						OutdatedSubState.currChanges = returnedData[1];
-						FlxG.switchState(new OutdatedSubState());
-					}
-					else
-					{
-						FlxG.switchState(new MainMenuState());
-					}
-				}
-				
-				http.onError = function (error) {
-				  trace('error: $error');
-				  FlxG.switchState(new MainMenuState()); // fail but we go anyway
-				}
-				
-				http.request();
-			});
-			// FlxG.sound.play(Paths.music('titleShoot'), 0.7);
 		}
 
 		if (pressedEnter && !skippedIntro && initialized)

@@ -25,7 +25,7 @@ class AnimationDebug extends FlxState
 	var daAnim:String = 'spooky';
 	var camFollow:FlxObject;
 
-	public function new(daAnim:String = 'spooky')
+	public function new(daAnim:String = 'bf')
 	{
 		super();
 		this.daAnim = daAnim;
@@ -91,6 +91,9 @@ class AnimationDebug extends FlxState
 			var text:FlxText = new FlxText(10, 20 + (18 * daLoop), 0, anim + ": " + offsets, 15);
 			text.scrollFactor.set();
 			text.color = FlxColor.BLUE;
+			if (animList[curAnim] == anim) {
+				text.color = FlxColor.YELLOW;
+			}
 			dumbTexts.add(text);
 
 			if (pushList)

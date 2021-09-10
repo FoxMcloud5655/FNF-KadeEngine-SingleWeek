@@ -201,7 +201,6 @@ class GameplayCustomizeState extends MusicBeatState
         camHUD.zoom += 0.010;
 
         trace('beat');
-
     }
 
 

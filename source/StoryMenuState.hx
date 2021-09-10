@@ -24,16 +24,10 @@ class StoryMenuState extends MusicBeatState
 {
 	var scoreText:FlxText;
 
-	static function weekData():Array<Dynamic>
+	public static function weekData():Array<Dynamic>
 	{
 		return [
-			['Tutorial'],
 			['Bopeebo', 'Fresh', 'Dad Battle'],
-			['Spookeez', 'South', "Monster"],
-			['Pico', 'Philly Nice', "Blammed"],
-			['Satin Panties', "High", "Milf"],
-			['Cocoa', 'Eggnog', 'Winter Horrorland'],
-			['Senpai', 'Roses', 'Thorns']
 		];
 	}
 	var curDifficulty:Int = 1;
@@ -41,13 +35,7 @@ class StoryMenuState extends MusicBeatState
 	public static var weekUnlocked:Array<Bool> = [];
 
 	var weekCharacters:Array<Dynamic> = [
-		['', 'bf', 'gf'],
 		['dad', 'bf', 'gf'],
-		['spooky', 'bf', 'gf'],
-		['pico', 'bf', 'gf'],
-		['mom', 'bf', 'gf'],
-		['parents-christmas', 'bf', 'gf'],
-		['senpai', 'bf', 'gf']
 	];
 
 	var weekNames:Array<String> = CoolUtil.coolTextFile(Paths.txt('data/weekNames'));
@@ -136,7 +124,7 @@ class StoryMenuState extends MusicBeatState
 
 		grpWeekCharacters = new FlxTypedGroup<MenuCharacter>();
 
-		trace("Line 70");
+		trace("Loaded vars.");
 
 		for (i in 0...weekData().length)
 		{
@@ -169,7 +157,7 @@ class StoryMenuState extends MusicBeatState
 			}
 		}
 
-		trace("Line 96");
+		trace("Built week data.");
 
 		grpWeekCharacters.add(new MenuCharacter(0, 100, 0.5, false));
 		grpWeekCharacters.add(new MenuCharacter(450, 25, 0.9, true));
@@ -178,7 +166,7 @@ class StoryMenuState extends MusicBeatState
 		difficultySelectors = new FlxGroup();
 		add(difficultySelectors);
 
-		trace("Line 124");
+		trace("Built character/difficulty data.");
 
 		leftArrow = new FlxSprite(grpWeekText.members[0].x + grpWeekText.members[0].width + 10, grpWeekText.members[0].y + 10);
 		leftArrow.frames = ui_tex;
@@ -204,10 +192,12 @@ class StoryMenuState extends MusicBeatState
 		rightArrow.animation.play('idle');
 		difficultySelectors.add(rightArrow);
 
-		trace("Line 150");
+		trace("Built animation data.");
 
 		add(yellowBG);
 		add(grpWeekCharacters);
+
+		trace("Added background and characters.");
 
 		txtTracklist = new FlxText(FlxG.width * 0.05, yellowBG.x + yellowBG.height + 100, 0, "Tracks", 32);
 		txtTracklist.alignment = CENTER;
@@ -218,8 +208,11 @@ class StoryMenuState extends MusicBeatState
 		add(scoreText);
 		add(txtWeekTitle);
 
+		trace("Added tracklist, score, and week title.");
+
 		updateText();
 
+		trace("Updated text.");
 
 		var bullShit:Int = 0;
 
@@ -233,7 +226,7 @@ class StoryMenuState extends MusicBeatState
 			bullShit++;
 		}
 
-		trace("Line 165");
+		trace("Added (un)locked weeks.");
 
 		super.create();
 	}
